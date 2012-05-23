@@ -4,25 +4,40 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
 
-import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 
 import de.neuland.jade4j.template.TemplateLoader;
+import javax.annotation.PostConstruct;
+import javax.servlet.ServletContext;
+import org.springframework.web.context.ServletContextAware;
+import org.springframework.web.context.support.ServletContextResourceLoader;
 
-public class SpringTemplateLoader implements TemplateLoader {
+public class SpringTemplateLoader implements TemplateLoader, ServletContextAware {
 
-	private final ResourceLoader resourceLoader;
+        private ResourceLoader resourceLoader;
+        private String encoding = "UTF-8";
+        private String suffix = ".jade";
+        private String basePath = "";
+        private ServletContext context;
 
-	private String encoding = "UTF-8";
-	private String suffix = ".jade";
-	private String basePath = "";
+        @PostConstruct
+        public void init() {
+            if(this.resourceLoader == null) {
+                this.resourceLoader = new ServletContextResourceLoader(context);
+            }
+        }
 
-	public SpringTemplateLoader() {
-		this.resourceLoader = new DefaultResourceLoader();
-	}
+        @Override
+        public void setServletContext(ServletContext servletContext) {
+            this.context = servletContext;
+        }
 
-	@Override
+        public void setResourceLoader(ResourceLoader resourceLoader) {
+            this.resourceLoader = resourceLoader;
+        }
+        
+        @Override
 	public long getLastModified(String name) {
 		Resource resource = getResource(name);
 		try {
