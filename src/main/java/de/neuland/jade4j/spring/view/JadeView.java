@@ -38,6 +38,7 @@ public class JadeView extends AbstractUrlBasedView {
 			} catch (JadeException e) {
 				String htmlString = e.toHtmlString();
 				responseWriter.write(htmlString);
+				e.printStackTrace();
 			} catch (IOException e) {
 				responseWriter.write("<pre>could not find template: " + getUrl() + "\n");
 				e.printStackTrace(responseWriter);

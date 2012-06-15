@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>de.neuland</groupId>
 	<artifactId>spring-jade4j</artifactId>
-	<version>0.2.1</version>
+	<version>0.2.2</version>
 	<name>Spring interface to the Jade compiler</name>
 	<properties>
 		<org.springframework.version>3.0.7.RELEASE</org.springframework.version>
@@ -41,7 +41,7 @@
 		<dependency>
 			<groupId>de.neuland</groupId>
 			<artifactId>jade4j</artifactId>
-			<version>0.2.8</version>
+			<version>0.2.11</version>
 		</dependency>
 
 		<!-- Spring framework -->
@@ -69,13 +69,14 @@
 			<artifactId>slf4j-api</artifactId>
 			<version>1.6.0</version>
 		</dependency>
+		
+		<!-- Test -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
 			<version>1.6.0</version>
+			<scope>test</scope>
 		</dependency>
-
-		<!-- Test -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
