@@ -10,7 +10,7 @@ applicationContext.xml
 
 ```xml
 <bean id="templateLoader" class="de.neuland.jade4j.spring.template.SpringTemplateLoader">
-	<property name="basePath" value="classpath:/WEB-INF/pages/" />
+	<property name="basePath" value="/WEB-INF/views/" />
 </bean>
 
 <bean id="jadeConfiguration" class="de.neuland.jade4j.JadeConfiguration">
@@ -47,7 +47,7 @@ We are using Github for Maven hosting. Just add this repository ...
 <dependency>
   <groupId>de.neuland</groupId>
   <artifactId>spring-jade4j</artifactId>
-  <version>0.2.1</version>
+  <version>0.2.2</version>
 </dependency>
 ```
 
