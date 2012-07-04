@@ -22,11 +22,16 @@ public class JadeView extends AbstractUrlBasedView {
 	private String encoding;
 	private JadeConfiguration configuration;
 	private boolean renderExceptions = false;
+	private String contentType;
 
 	@Override
 	protected void renderMergedOutputModel(Map<String, Object> model, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		logger.trace("Rendering Jade template [" + getUrl() + "] in JadeView '" + getBeanName() + "'");
+
+		if (contentType != null) {
+			response.setContentType(contentType);
+		}
 
 		PrintWriter responseWriter = response.getWriter();
 
@@ -89,6 +94,14 @@ public class JadeView extends AbstractUrlBasedView {
 
 	public void setRenderExceptions(boolean renderExceptions) {
 		this.renderExceptions = renderExceptions;
+	}
+
+	public String getContentType() {
+		return contentType;
+	}
+
+	public void setContentType(String contentType) {
+		this.contentType = contentType;
 	}
 
 }
