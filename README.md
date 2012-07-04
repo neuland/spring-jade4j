@@ -15,6 +15,7 @@ applicationContext.xml
 
 <bean id="jadeConfiguration" class="de.neuland.jade4j.JadeConfiguration">
 	<property name="prettyPrint" value="false" />
+	<property name="caching" value="false" />
 	<property name="templateLoader" ref="templateLoader" />
 </bean>
 
