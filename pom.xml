@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>de.neuland</groupId>
 	<artifactId>spring-jade4j</artifactId>
-	<version>0.2.3</version>
+	<version>0.2.4</version>
 	<name>Spring interface to the Jade compiler</name>
 	<properties>
 		<org.springframework.version>3.0.7.RELEASE</org.springframework.version>
@@ -26,7 +26,7 @@
 	<repositories>
 		<repository>
 			<id>jade4j-releases</id>
-			<url>https://github.com/neuland/jade4j/raw/master/releases</url>
+			<url>https://raw.github.com/neuland/jade4j/master/releases</url>
 		</repository>
 	</repositories>
 
@@ -41,7 +41,7 @@
 		<dependency>
 			<groupId>de.neuland</groupId>
 			<artifactId>jade4j</artifactId>
-			<version>0.2.13</version>
+			<version>0.2.19</version>
 		</dependency>
 
 		<!-- Spring framework -->
