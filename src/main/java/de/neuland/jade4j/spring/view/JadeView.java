@@ -41,8 +41,9 @@ public class JadeView extends AbstractUrlBasedView {
 				configuration.renderTemplate(getTemplate(), model, writer);
 				responseWriter.write(writer.toString());
 			} catch (JadeException e) {
-				String htmlString = e.toHtmlString();
+				String htmlString = e.toHtmlString(writer.toString());
 				responseWriter.write(htmlString);
+				logger.error("already generated html output for template [" + getUrl() + "]:\n" + writer.toString());
 				e.printStackTrace();
 			} catch (IOException e) {
 				responseWriter.write("<pre>could not find template: " + getUrl() + "\n");
