@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>de.neuland</groupId>
 	<artifactId>spring-jade4j</artifactId>
-	<version>0.3.0</version>
+	<version>0.3.1</version>
 	<name>Spring interface to the Jade compiler</name>
 	<properties>
 		<org.springframework.version>3.0.7.RELEASE</org.springframework.version>
@@ -41,7 +41,7 @@
 		<dependency>
 			<groupId>de.neuland</groupId>
 			<artifactId>jade4j</artifactId>
-			<version>0.3.3</version>
+			<version>0.3.8</version>
 		</dependency>
 
 		<!-- Spring framework -->
