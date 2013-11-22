@@ -1,2 +1,2 @@
 #!/bin/bash
-mvn -DaltDeploymentRepository=snapshot-repo::default::file:releases clean deploy
+mvn release:clean release:prepare release:perform -Darguments="-Dgpg.keyname=DCD30968 -Dgpg.passphrase=$JADE4J_PASS"
