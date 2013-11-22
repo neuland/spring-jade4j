@@ -2,16 +2,108 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>de.neuland</groupId>
+    <groupId>de.neuland-bfi</groupId>
 	<artifactId>spring-jade4j</artifactId>
-	<version>0.3.3</version>
-	<name>Spring interface to the Jade compiler</name>
+    <version>0.4.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+	<name>spring-jade4j</name>
+	<description>Spring interface to the Jade compiler</description>
+    <parent>
+        <groupId>org.sonatype.oss</groupId>
+        <artifactId>oss-parent</artifactId>
+        <version>7</version>
+    </parent>
+    
+    <url>https://github.com/neuland/spring-jade4j</url>
+
+    <issueManagement>
+        <url>https://github.com/neuland/spring-jade4j/issues</url>
+        <system>GitHub Issues</system>
+    </issueManagement>
+
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>http://www.opensource.org/licenses/mit-license.php</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <scm>
+        <url>https://github.com/neuland/spring-jade4j</url>
+        <connection>scm:git:git://github.com/neuland/spring-jade4j.git</connection>
+        <developerConnection>scm:git:git@github.com:neuland/spring-jade4j.git</developerConnection>
+    </scm>
+
+    <developers>
+        <developer>
+            <name>Artur Tomas</name>
+            <url>https://github.com/atomiccoder</url>
+            <id>atomiccoder</id>
+        </developer>
+        <developer>
+            <name>Stefan Kuper</name>
+            <url>https://github.com/planetk</url>
+            <id>planetk</id>
+        </developer>
+        <developer>
+            <name>Michael Geers</name>
+            <url>https://github.com/naltatis</url>
+            <id>naltatis</id>
+        </developer>
+    </developers>
+
 	<properties>
 		<org.springframework.version>3.0.7.RELEASE</org.springframework.version>
 		<servlet-api-version>2.5</servlet-api-version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
+
+    <profiles>
+        <profile>
+            <id>release-sign-artifacts</id>
+            <activation>
+                <property>
+                    <name>performRelease</name>
+                    <value>true</value>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>1.4</version>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
 	<build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-release-plugin</artifactId>
+                    <version>2.1</version>
+                    <configuration>
+                        <mavenExecutorId>forked-path</mavenExecutorId>
+                        <useReleaseProfile>false</useReleaseProfile>
+                        <arguments>${arguments} -Psonatype-oss-release</arguments>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -25,9 +117,21 @@
                 <executions>
                     <execution>
                         <id>attach-sources</id>
-                        <phase>deploy</phase>
                         <goals>
                             <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.9.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
                         </goals>
                     </execution>
                 </executions>
@@ -46,13 +150,6 @@
 		</plugins>
 	</build>
 
-	<repositories>
-		<repository>
-			<id>jade4j-releases</id>
-			<url>https://raw.github.com/neuland/jade4j/master/releases</url>
-		</repository>
-	</repositories>
-
 	<dependencies>
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -62,9 +159,9 @@
 		</dependency>
 
 		<dependency>
-			<groupId>de.neuland</groupId>
+			<groupId>de.neuland-bfi</groupId>
 			<artifactId>jade4j</artifactId>
-			<version>0.3.15</version>
+			<version>0.4.0</version>
 		</dependency>
 
 		<!-- Spring framework -->
