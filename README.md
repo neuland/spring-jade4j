@@ -61,24 +61,17 @@ public class JadeConfig {
 
 ### via Maven
 
-We are using Github for Maven hosting. Just add this repository ...
+As of release 0.4.0 we changed maven hosting to sonatype. using Github Maven Repository is no longer required
 
-```xml
-<repositories>
-  <repository>
-    <id>spring-jade4j-releases</id>
-    <url>https://raw.github.com/neuland/spring-jade4j/master/releases</url>
-  </repository>
-</repositories>
-```
+Please be aware that we had to change the group id from 'de.neuland' to 'de.neuland-bfi' in order to meet sonatype conventions for group naming.
 
-... and dependency definitions to your `pom.xml`.
+Just add following dependency definitions to your `pom.xml`.
 
 ```xml
 <dependency>
-  <groupId>de.neuland</groupId>
+  <groupId>de.neuland-bfi</groupId>
   <artifactId>spring-jade4j</artifactId>
-  <version>0.3.3</version>
+  <version>0.4.0</version>
 </dependency>
 ```
 
