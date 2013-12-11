@@ -1,11 +1,12 @@
 package de.neuland.jade4j.spring.view;
 
+import org.springframework.web.servlet.view.AbstractTemplateViewResolver;
 import org.springframework.web.servlet.view.AbstractUrlBasedView;
 import org.springframework.web.servlet.view.UrlBasedViewResolver;
 
 import de.neuland.jade4j.JadeConfiguration;
 
-public class JadeViewResolver extends UrlBasedViewResolver {
+public class JadeViewResolver extends AbstractTemplateViewResolver {
 
 	private JadeConfiguration configuration;
 	private boolean renderExceptions = false;

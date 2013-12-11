@@ -10,6 +10,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.web.servlet.view.AbstractTemplateView;
 import org.springframework.web.servlet.view.AbstractUrlBasedView;
 
 import de.neuland.jade4j.JadeConfiguration;
@@ -17,7 +18,7 @@ import de.neuland.jade4j.exceptions.JadeCompilerException;
 import de.neuland.jade4j.exceptions.JadeException;
 import de.neuland.jade4j.template.JadeTemplate;
 
-public class JadeView extends AbstractUrlBasedView {
+public class JadeView extends AbstractTemplateView {
 
 	private String encoding;
 	private JadeConfiguration configuration;
@@ -25,8 +26,11 @@ public class JadeView extends AbstractUrlBasedView {
 	private String contentType;
 
 	@Override
-	protected void renderMergedOutputModel(Map<String, Object> model, HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
+	protected void renderMergedTemplateModel(Map<String, Object> model, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		doRender(model, response);
+	}
+
+	private void doRender(Map<String, Object> model, HttpServletResponse response) throws IOException {
 		logger.trace("Rendering Jade template [" + getUrl() + "] in JadeView '" + getBeanName() + "'");
 
 		if (contentType != null) {
