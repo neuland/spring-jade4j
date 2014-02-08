@@ -1,22 +1,20 @@
 package de.neuland.jade4j.spring.view;
 
+import de.neuland.jade4j.JadeConfiguration;
+import de.neuland.jade4j.exceptions.JadeException;
+import de.neuland.jade4j.spring.helper.SpringHelper;
+import de.neuland.jade4j.template.JadeTemplate;
+import org.springframework.web.servlet.support.RequestContext;
+import org.springframework.web.servlet.view.AbstractTemplateView;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.io.Writer;
 import java.util.Locale;
 import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.springframework.web.servlet.view.AbstractTemplateView;
-import org.springframework.web.servlet.view.AbstractUrlBasedView;
-
-import de.neuland.jade4j.JadeConfiguration;
-import de.neuland.jade4j.exceptions.JadeCompilerException;
-import de.neuland.jade4j.exceptions.JadeException;
-import de.neuland.jade4j.template.JadeTemplate;
 
 public class JadeView extends AbstractTemplateView {
 
@@ -27,10 +25,19 @@ public class JadeView extends AbstractTemplateView {
 
 	@Override
 	protected void renderMergedTemplateModel(Map<String, Object> model, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		exposeHelpers(model, request);
 		doRender(model, response);
 	}
 
-	private void doRender(Map<String, Object> model, HttpServletResponse response) throws IOException {
+	protected void exposeHelpers(Map<String, Object> model, HttpServletRequest request) throws Exception {
+		RequestContext requestContext = (RequestContext) model.get(AbstractTemplateView.SPRING_MACRO_REQUEST_CONTEXT_ATTRIBUTE);
+
+		if(requestContext != null) {
+			model.put(SpringHelper.SPRING_HELPER_NAME, new SpringHelper(requestContext, model));
+		}
+	}
+
+	protected void doRender(Map<String, Object> model, HttpServletResponse response) throws IOException {
 		logger.trace("Rendering Jade template [" + getUrl() + "] in JadeView '" + getBeanName() + "'");
 
 		if (contentType != null) {
@@ -70,14 +77,6 @@ public class JadeView extends AbstractTemplateView {
 	@Override
 	public boolean checkResource(Locale locale) throws Exception {
 		return configuration.templateExists(getUrl());
-	}
-
-	protected void processTemplate(JadeTemplate template, Map<String, Object> model, HttpServletResponse response) throws IOException {
-		try {
-			configuration.renderTemplate(template, model, response.getWriter());
-		} catch (JadeCompilerException e) {
-			e.printStackTrace();
-		}
 	}
 
 	/* Configuration Handling */

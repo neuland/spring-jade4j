@@ -1,10 +1,8 @@
 package de.neuland.jade4j.spring.view;
 
+import de.neuland.jade4j.JadeConfiguration;
 import org.springframework.web.servlet.view.AbstractTemplateViewResolver;
 import org.springframework.web.servlet.view.AbstractUrlBasedView;
-import org.springframework.web.servlet.view.UrlBasedViewResolver;
-
-import de.neuland.jade4j.JadeConfiguration;
 
 public class JadeViewResolver extends AbstractTemplateViewResolver {
 
