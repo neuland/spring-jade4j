@@ -71,7 +71,7 @@ Just add following dependency definitions to your `pom.xml`.
 <dependency>
   <groupId>de.neuland-bfi</groupId>
   <artifactId>spring-jade4j</artifactId>
-  <version>0.4.0</version>
+  <version>0.4.2</version>
 </dependency>
 ```
 
