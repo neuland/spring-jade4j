@@ -72,7 +72,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
-                        <version>1.4</version>
+                        <version>1.6</version>
                         <executions>
                             <execution>
                                 <id>sign-artifacts</id>
@@ -94,7 +94,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-release-plugin</artifactId>
-                    <version>2.1</version>
+                    <version>2.5.3</version>
                     <configuration>
                         <mavenExecutorId>forked-path</mavenExecutorId>
                         <useReleaseProfile>false</useReleaseProfile>
@@ -106,13 +106,15 @@
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
+                <version>3.3</version>
+                <configuration>
 					<source>1.6</source>
 					<target>1.6</target>
 				</configuration>
 			</plugin>
             <plugin>
                 <artifactId>maven-source-plugin</artifactId>
+                <version>2.4</version>
                 <executions>
                     <execution>
                         <id>attach-sources</id>
@@ -125,7 +127,7 @@
              <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>2.9.1</version>
+                <version>2.10.3</version>
                 <executions>
                     <execution>
                         <id>attach-javadocs</id>
@@ -138,6 +140,7 @@
             <plugin>
                 <!-- explicitly define maven-deploy-plugin after other to force exec order -->
                 <artifactId>maven-deploy-plugin</artifactId>
+                <version>2.8.2</version>
                 <executions>
                     <execution>
                         <id>deploy</id>
@@ -160,7 +163,7 @@
 		<dependency>
 			<groupId>de.neuland-bfi</groupId>
 			<artifactId>jade4j</artifactId>
-			<version>1.1.2</version>
+			<version>1.1.3</version>
 		</dependency>
 
 		<!-- Spring framework -->
@@ -185,7 +188,7 @@
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
-            <version>2.1</version>
+            <version>2.4</version>
         </dependency>
 
 		<!-- Other dependencies -->
@@ -212,7 +215,7 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.11</version>
+			<version>4.12</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
