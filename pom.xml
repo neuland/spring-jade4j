@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
     <groupId>de.neuland-bfi</groupId>
 	<artifactId>spring-jade4j</artifactId>
-    <version>1.2.5</version>
+    <version>1.2.6-SNAPSHOT</version>
     <packaging>jar</packaging>
 	<name>spring-jade4j</name>
 	<description>Spring interface to the Jade compiler</description>
@@ -32,7 +32,7 @@
         <url>https://github.com/neuland/spring-jade4j</url>
         <connection>scm:git:git://github.com/neuland/spring-jade4j.git</connection>
         <developerConnection>scm:git:git@github.com:neuland/spring-jade4j.git</developerConnection>
-      <tag>spring-jade4j-1.2.5</tag>
+      <tag>HEAD</tag>
   </scm>
 
     <developers>
