@@ -18,6 +18,8 @@ import de.neuland.jade4j.exceptions.JadeCompilerException;
 import de.neuland.jade4j.exceptions.JadeException;
 import de.neuland.jade4j.template.JadeTemplate;
 
+import static javax.servlet.http.HttpServletResponse.SC_INTERNAL_SERVER_ERROR;
+
 public class JadeView extends AbstractTemplateView {
 
 	private String encoding;
@@ -45,10 +47,12 @@ public class JadeView extends AbstractTemplateView {
 				configuration.renderTemplate(getTemplate(), model, writer);
 				responseWriter.write(writer.toString());
 			} catch (JadeException e) {
+				response.setStatus(SC_INTERNAL_SERVER_ERROR);
 				String htmlString = e.toHtmlString(writer.toString());
 				responseWriter.write(htmlString);
 				logger.error("failed to render template [" + getUrl() + "]", e);
 			} catch (IOException e) {
+				response.setStatus(SC_INTERNAL_SERVER_ERROR);
 				responseWriter.write("<pre>could not find template: " + getUrl() + "\n");
 				e.printStackTrace(responseWriter);
 				responseWriter.write("</pre>");
@@ -58,6 +62,7 @@ public class JadeView extends AbstractTemplateView {
 			try {
 				configuration.renderTemplate(getTemplate(), model, responseWriter);
 			} catch (Throwable e) {
+				response.setStatus(SC_INTERNAL_SERVER_ERROR);
 				logger.error("failed to render template [" + getUrl() + "]\n", e);
 			}
 		}
