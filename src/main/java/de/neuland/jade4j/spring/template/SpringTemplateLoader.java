@@ -56,7 +56,7 @@ public class SpringTemplateLoader implements TemplateLoader, ServletContextAware
 
 	@Override
 	public String getExtension() {
-		return suffix.replaceAll("\\.","");
+		return suffix.substring(1,suffix.length());
 	}
 
 	private Resource getResource(String name) {
