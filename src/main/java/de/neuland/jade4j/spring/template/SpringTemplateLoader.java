@@ -54,6 +54,11 @@ public class SpringTemplateLoader implements TemplateLoader, ServletContextAware
 		return new InputStreamReader(resource.getInputStream(), encoding);
 	}
 
+	@Override
+	public String getExtension() {
+		return suffix.replaceAll("\\.","");
+	}
+
 	private Resource getResource(String name) {
 		String resourceName = basePath + name;
         if (hasNoExtension(resourceName)) {
