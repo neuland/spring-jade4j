@@ -1,14 +1,14 @@
-package de.neuland.jade4j.spring.template;
+package de.neuland.pug4j.spring.template;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
 
+import de.neuland.pug4j.template.TemplateLoader;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.apache.commons.io.FilenameUtils;
 
-import de.neuland.jade4j.template.TemplateLoader;
 import javax.annotation.PostConstruct;
 import javax.servlet.ServletContext;
 import org.springframework.web.context.ServletContextAware;
@@ -16,29 +16,29 @@ import org.springframework.web.context.support.ServletContextResourceLoader;
 
 public class SpringTemplateLoader implements TemplateLoader, ServletContextAware {
 
-        private ResourceLoader resourceLoader;
-        private String encoding = "UTF-8";
-        private String suffix = ".jade";
-        private String basePath = "";
-        private ServletContext context;
+	private ResourceLoader resourceLoader;
+	private String encoding = "UTF-8";
+	private String suffix = ".jade";
+	private String basePath = "";
+	private ServletContext context;
 
-        @PostConstruct
-        public void init() {
-            if(this.resourceLoader == null) {
-                this.resourceLoader = new ServletContextResourceLoader(context);
-            }
-        }
+	@PostConstruct
+	public void init() {
+		if(this.resourceLoader == null) {
+			this.resourceLoader = new ServletContextResourceLoader(context);
+		}
+	}
 
-        @Override
-        public void setServletContext(ServletContext servletContext) {
-            this.context = servletContext;
-        }
+	@Override
+	public void setServletContext(ServletContext servletContext) {
+		this.context = servletContext;
+	}
 
-        public void setResourceLoader(ResourceLoader resourceLoader) {
-            this.resourceLoader = resourceLoader;
-        }
-        
-        @Override
+	public void setResourceLoader(ResourceLoader resourceLoader) {
+		this.resourceLoader = resourceLoader;
+	}
+
+	@Override
 	public long getLastModified(String name) {
 		Resource resource = getResource(name);
 		try {

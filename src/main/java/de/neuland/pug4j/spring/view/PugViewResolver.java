@@ -1,37 +1,35 @@
-package de.neuland.jade4j.spring.view;
+package de.neuland.pug4j.spring.view;
 
+import de.neuland.pug4j.PugConfiguration;
 import org.springframework.web.servlet.view.AbstractTemplateViewResolver;
 import org.springframework.web.servlet.view.AbstractUrlBasedView;
-import org.springframework.web.servlet.view.UrlBasedViewResolver;
 
-import de.neuland.jade4j.JadeConfiguration;
+public class PugViewResolver extends AbstractTemplateViewResolver {
 
-public class JadeViewResolver extends AbstractTemplateViewResolver {
-
-	private JadeConfiguration configuration;
+	private PugConfiguration configuration;
 	private boolean renderExceptions = false;
 	private String contentType = "text/html;charset=UTF-8";
 
-	public JadeViewResolver() {
+	public PugViewResolver() {
 		setViewClass(requiredViewClass());
 	}
 
 	@Override
 	@SuppressWarnings("rawtypes")
 	protected Class requiredViewClass() {
-		return JadeView.class;
+		return PugView.class;
 	}
 
 	@Override
 	protected AbstractUrlBasedView buildView(String viewName) throws Exception {
-		JadeView view = (JadeView) super.buildView(viewName);
+		PugView view = (PugView) super.buildView(viewName);
 		view.setConfiguration(this.configuration);
 		view.setContentType(contentType);
 		view.setRenderExceptions(renderExceptions);
 		return view;
 	}
 
-	public void setConfiguration(JadeConfiguration configuration) {
+	public void setConfiguration(PugConfiguration configuration) {
 		this.configuration = configuration;
 	}
 

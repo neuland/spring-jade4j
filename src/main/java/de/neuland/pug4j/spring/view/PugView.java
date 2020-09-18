@@ -1,4 +1,4 @@
-package de.neuland.jade4j.spring.view;
+package de.neuland.pug4j.spring.view;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -10,18 +10,17 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import de.neuland.pug4j.PugConfiguration;
+import de.neuland.pug4j.exceptions.PugCompilerException;
+import de.neuland.pug4j.exceptions.PugException;
+import de.neuland.pug4j.template.PugTemplate;
 import org.springframework.web.servlet.view.AbstractTemplateView;
-import org.springframework.web.servlet.view.AbstractUrlBasedView;
 
-import de.neuland.jade4j.JadeConfiguration;
-import de.neuland.jade4j.exceptions.JadeCompilerException;
-import de.neuland.jade4j.exceptions.JadeException;
-import de.neuland.jade4j.template.JadeTemplate;
 
-public class JadeView extends AbstractTemplateView {
+public class PugView extends AbstractTemplateView {
 
 	private String encoding;
-	private JadeConfiguration configuration;
+	private PugConfiguration configuration;
 	private boolean renderExceptions = false;
 	private String contentType;
 
@@ -31,7 +30,7 @@ public class JadeView extends AbstractTemplateView {
 	}
 
 	private void doRender(Map<String, Object> model, HttpServletResponse response) throws IOException {
-		logger.trace("Rendering Jade template [" + getUrl() + "] in JadeView '" + getBeanName() + "'");
+		logger.trace("Rendering Pug template [" + getUrl() + "] in PugView '" + getBeanName() + "'");
 
 		if (contentType != null) {
 			response.setContentType(contentType);
@@ -44,7 +43,7 @@ public class JadeView extends AbstractTemplateView {
 			try {
 				configuration.renderTemplate(getTemplate(), model, writer);
 				responseWriter.write(writer.toString());
-			} catch (JadeException e) {
+			} catch (PugException e) {
 				String htmlString = e.toHtmlString(writer.toString());
 				responseWriter.write(htmlString);
 				logger.error("failed to render template [" + getUrl() + "]", e);
@@ -63,7 +62,7 @@ public class JadeView extends AbstractTemplateView {
 		}
 	}
 
-	protected JadeTemplate getTemplate() throws IOException, JadeException {
+	protected PugTemplate getTemplate() throws IOException, PugException {
 		return configuration.getTemplate(getUrl());
 	}
 
@@ -72,20 +71,20 @@ public class JadeView extends AbstractTemplateView {
 		return configuration.templateExists(getUrl());
 	}
 
-	protected void processTemplate(JadeTemplate template, Map<String, Object> model, HttpServletResponse response) throws IOException {
+	protected void processTemplate(PugTemplate template, Map<String, Object> model, HttpServletResponse response) throws IOException {
 		try {
 			configuration.renderTemplate(template, model, response.getWriter());
-		} catch (JadeCompilerException e) {
+		} catch (PugCompilerException e) {
 			e.printStackTrace();
 		}
 	}
 
 	/* Configuration Handling */
-	public JadeConfiguration getConfiguration() {
+	public PugConfiguration getConfiguration() {
 		return configuration;
 	}
 
-	public void setConfiguration(JadeConfiguration configuration) {
+	public void setConfiguration(PugConfiguration configuration) {
 		this.configuration = configuration;
 	}
 

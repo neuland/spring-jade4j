@@ -1,6 +1,6 @@
 [![Build Status](https://secure.travis-ci.org/neuland/spring-jade4j.png?branch=master)](http://travis-ci.org/neuland/spring-jade4j)
 
-# A Spring Integration for Jade4J
+# A Spring Integration for Pug4J (formerly known as Jade4J)
 
 See [neuland/jade4j](https://github.com/neuland/jade4j) for more information.
 
@@ -9,18 +9,18 @@ See [neuland/jade4j](https://github.com/neuland/jade4j) for more information.
 applicationContext.xml
 
 ```xml
-<bean id="templateLoader" class="de.neuland.jade4j.spring.template.SpringTemplateLoader">
+<bean id="templateLoader" class="de.neuland.pug4j.spring.template.SpringTemplateLoader">
 	<property name="basePath" value="/WEB-INF/views/" />
 </bean>
 
-<bean id="jadeConfiguration" class="de.neuland.jade4j.JadeConfiguration">
+<bean id="pugConfiguration" class="de.neuland.pug4j.JadeConfiguration">
 	<property name="prettyPrint" value="false" />
 	<property name="caching" value="false" />
 	<property name="templateLoader" ref="templateLoader" />
 </bean>
 
-<bean id="viewResolver" class="de.neuland.jade4j.spring.view.JadeViewResolver">
-	<property name="configuration" ref="jadeConfiguration" />
+<bean id="viewResolver" class="de.neuland.pug4j.spring.view.PugViewResolver">
+	<property name="configuration" ref="pugConfiguration" />
 	<!-- rendering nice html formatted error pages for development -->
 	<property name="renderExceptions" value="true" />
 </bean>
@@ -29,20 +29,20 @@ Or, if you are using Spring JavaConfig:
 
 ```java
 @Configuration
-public class JadeConfig {
+public class PugConfig {
 
 	@Bean
 	public SpringTemplateLoader templateLoader() {
 		SpringTemplateLoader templateLoader = new SpringTemplateLoader();
 		templateLoader.setBasePath("/WEB-INF/views/");
 		templateLoader.setEncoding("UTF-8");
-		templateLoader.setSuffix(".jade");
+		templateLoader.setSuffix(".pug");
 		return templateLoader;
 	}
 
 	@Bean
-	public JadeConfiguration jadeConfiguration() {
-		JadeConfiguration configuration = new JadeConfiguration();
+	public PugConfiguration jadeConfiguration() {
+		PugConfiguration configuration = new PugConfiguration();
 		configuration.setCaching(false);
 		configuration.setTemplateLoader(templateLoader());
 		return configuration;
@@ -50,8 +50,8 @@ public class JadeConfig {
 
 	@Bean
 	public ViewResolver viewResolver() {
-		JadeViewResolver viewResolver = new JadeViewResolver();
-		viewResolver.setConfiguration(jadeConfiguration());
+		PugViewResolver viewResolver = new PugViewResolver();
+		viewResolver.setConfiguration(pugConfiguration());
 		return viewResolver;
 	}
 }
@@ -70,8 +70,8 @@ Just add following dependency definitions to your `pom.xml`.
 ```xml
 <dependency>
   <groupId>de.neuland-bfi</groupId>
-  <artifactId>spring-jade4j</artifactId>
-  <version>1.3.1</version>
+  <artifactId>spring-pug4j</artifactId>
+  <version>2.0.0</version>
 </dependency>
 ```
 
@@ -79,12 +79,13 @@ Just add following dependency definitions to your `pom.xml`.
 
 - Stefan Kuper / [planetk](https://github.com/planetk)
 - Michael Geers / [naltatis](https://github.com/naltatis)
+- Christoph Blömer / [chbloemer](https://github.com/chbloemer)
 
 ## License
 
 The MIT License
 
-Copyright (C) 2012-2019 [neuland Büro für Informatik](http://www.neuland-bfi.de/), Bremen, Germany
+Copyright (C) 2012-2020 [neuland Büro für Informatik](http://www.neuland-bfi.de/), Bremen, Germany
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
