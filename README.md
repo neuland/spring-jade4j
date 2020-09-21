@@ -1,5 +1,10 @@
 [![Build Status](https://secure.travis-ci.org/neuland/spring-jade4j.png?branch=master)](http://travis-ci.org/neuland/spring-jade4j)
 
+# Attention: spring-jade4j is now spring-pug4j
+In alignment with the javascript template engine we renamed spring-jade4j to spring-pug4j. You will find it under https://github.com/neuland/spring-pug4j
+
+Please report spring-pug4j issues in the new repository.
+
 # A Spring Integration for Jade4J
 
 See [neuland/jade4j](https://github.com/neuland/jade4j) for more information.
